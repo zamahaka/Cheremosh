@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "240138426159",
+    "firebase_url": "https://cheremosh-6593e.firebaseio.com",
+    "project_id": "cheremosh-6593e",
+    "storage_bucket": "cheremosh-6593e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240138426159:android:d693a6900bff42d7",
+        "android_client_info": {
+          "package_name": "org.zamahaka.cheremosh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240138426159-vmj08kv4p4q9nqbkeo8msdd9vbir2u2u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.zamahaka.cheremosh",
+            "certificate_hash": "476b8acebf6b01360e4748f7fb7b8da16518b571"
+          }
+        },
+        {
+          "client_id": "240138426159-7abmv4l4upnes7vqkum9mv8cks636m8p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzMPF-YkX94mMM4ossvZGvOzfP6eoWW5A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240138426159-7abmv4l4upnes7vqkum9mv8cks636m8p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
