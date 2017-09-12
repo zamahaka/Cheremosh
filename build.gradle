@@ -31,8 +31,7 @@ task clean(type: Delete) {
 
 ext {
     supportLibVersion = '26.0.1'
-    retrofitVersion = '2.1.0'
-    gsonConverterVersion = '2.1.0'
+    retrofitVersion = '2.3.0'
     picassoVersion = '2.5.2'
     archVersion = '1.0.0-alpha9'
     anko_version = '0.10.1'

@@ -1,7 +1,8 @@
-package org.zamahaka.cheremosh
+package org.zamahaka.cheremosh.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import org.zamahaka.cheremosh.R
 
 class MainActivity : AppCompatActivity() {
 
