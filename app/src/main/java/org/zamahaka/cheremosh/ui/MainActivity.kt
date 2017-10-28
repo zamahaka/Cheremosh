@@ -6,25 +6,74 @@ import android.support.v7.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import org.jetbrains.anko.toast
 import org.zamahaka.cheremosh.R
+import org.zamahaka.cheremosh.model.Event
+import org.zamahaka.cheremosh.model.Location
+import org.zamahaka.cheremosh.ui.timeline.TimeLineActivity
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            TimeLineActivity.launch(this)
+        } else {
+            val loginIntent = AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setTheme(AuthUI.getDefaultTheme())
+                    .setLogo(AuthUI.NO_LOGO)
+                    .setAvailableProviders(getLoginProviders())
+                    .setIsSmartLockEnabled(true)
+                    .setAllowNewEmailAccounts(true)
+                    .build()
 
-        val loginIntent = AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setTheme(AuthUI.getDefaultTheme())
-                .setLogo(AuthUI.NO_LOGO)
-                .setAvailableProviders(getLoginProviders())
-                .setIsSmartLockEnabled(true)
-                .setAllowNewEmailAccounts(true)
-                .build()
+            startActivityForResult(loginIntent, RQC_SIGN_IN)
+        }
 
-        startActivityForResult(loginIntent, RQC_SIGN_IN)
+    }
+
+    private fun fetchTest() {
+        FirebaseDatabase.getInstance().reference
+                .child("test")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError?) {
+
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot) {
+                        println(p0)
+
+                        val list = p0.getValue(object : GenericTypeIndicator<List<@JvmSuppressWildcards Location>>() {})
+
+                        println(list)
+
+                        fetchEvents()
+                    }
+                })
+    }
+
+    private fun fetchEvents() {
+        FirebaseDatabase.getInstance().reference
+                .child("events")
+                .child(/*timestamp*/1509140624L.toString())
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError?) {
+
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot) {
+                        println(p0)
+
+                        val list = p0.getValue(object : GenericTypeIndicator<List<@JvmSuppressWildcards Event>>() {})
+
+                        println(list)
+                    }
+                })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -50,9 +99,7 @@ class MainActivity : AppCompatActivity() {
         val response = IdpResponse.fromResultIntent(data)
 
         if (resultCode == RESULT_OK) {
-            // Successfully signed in
-//            startSignedInActivity(response)
-            finish()
+            TimeLineActivity.launch(this)
             return
         } else {
             // Sign in failed

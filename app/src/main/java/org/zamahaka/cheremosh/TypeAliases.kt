@@ -5,3 +5,6 @@ package org.zamahaka.cheremosh
  */
 
 typealias Url = String
+typealias Longitude = Double
+typealias Latitude = Double
+typealias Timestamp = Long
