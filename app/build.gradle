@@ -12,7 +12,7 @@ kotlin {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "org.zamahaka.cheremosh"
         minSdkVersion 19
@@ -71,6 +71,10 @@ dependencies {
     implementation "com.google.firebase:firebase-messaging:$firebaseVersion"
 
     implementation "com.firebaseui:firebase-ui-auth:$firebaseUiVersion"
+
+    implementation ('com.github.b3er.rxfirebase:firebase-database-kotlin:11.2.0') {
+        transitive = true
+    }
 
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
