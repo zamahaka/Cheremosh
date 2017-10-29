@@ -4,8 +4,12 @@ import android.arch.lifecycle.LifecycleRegistry
 import android.arch.lifecycle.LifecycleRegistryOwner
 import android.content.Context
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
 import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_time_line.*
@@ -29,6 +33,22 @@ class TimeLineActivity : AppCompatActivity(), LifecycleRegistryOwner {
         setContentView(R.layout.activity_time_line)
 
         recyclerView.adapter = timeLineAdapter
+        recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            val bg = ColorDrawable(ContextCompat.getColor(applicationContext, android.R.color.darker_gray))
+
+            override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+                val childCount = parent.childCount
+
+                if (childCount == 0) return
+
+                for (i in 0..childCount step 2) {
+                    with(parent.getChildAt(i)) {
+                        bg.setBounds(left, top, right, bottom)
+                        bg.draw(c)
+                    }
+                }
+            }
+        })
 
         DispatcherBinder(this.lifecycle, timeLineDispatcher) { (events) ->
             timeLineAdapter.bindResults(events ?: emptyList())
