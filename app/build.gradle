@@ -12,7 +12,7 @@ kotlin {
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "org.zamahaka.cheremosh"
         minSdkVersion 19
@@ -32,6 +32,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -47,7 +48,8 @@ dependencies {
     implementation "com.android.support:design:$supportLibVersion"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$gsonConverterVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
     implementation "com.squareup.picasso:picasso:$picassoVersion"
 
     implementation "android.arch.lifecycle:runtime:$archVersion"
@@ -70,11 +72,17 @@ dependencies {
 
     implementation "com.firebaseui:firebase-ui-auth:$firebaseUiVersion"
 
+    implementation ('com.github.b3er.rxfirebase:firebase-database-kotlin:11.2.0') {
+        transitive = true
+    }
+
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
 
     implementation "com.jakewharton.rxbinding2:rxbinding:$rxBindingsVersion"
     implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingsVersion"
+
+    implementation 'com.github.badoualy:datepicker-timeline:c6dcd05737'
 }
 
 apply plugin: 'com.google.gms.google-services'
