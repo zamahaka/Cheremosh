@@ -13,7 +13,7 @@ import org.zamahaka.cheremosh.redux.Action
 class TimeLineMiddleware(private val timeLineService: TimeLineService) {
     fun getTimeLine(timestamp: Timestamp): Observable<TimeLineAction> =
             timeLineService.loadTimeLine(timestamp) //TODO convert to 0h:0m:0s
-                    .map { TimeLineAction.TimeLineSuccess(it) as TimeLineAction }
+                    .map { TimeLineAction.TimeLineSuccess(it.sortedBy { item -> item.date }) as TimeLineAction }
                     .subscribeOn(Schedulers.io())
                     .onErrorReturn { TimeLineAction.TimeLineError(it) }
 

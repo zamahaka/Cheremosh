@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "240138426159-6r89sva9hm4a6m2duqfks502a4gve8oi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.zamahaka.cheremosh",
+            "certificate_hash": "1fdf4fc89483fdc39d2967206c90dbe6db2fb55e"
+          }
+        },
+        {
           "client_id": "240138426159-vmj08kv4p4q9nqbkeo8msdd9vbir2u2u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
