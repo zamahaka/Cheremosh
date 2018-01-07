@@ -11,12 +11,12 @@ kotlin {
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.1'
     defaultConfig {
         applicationId "org.zamahaka.cheremosh"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -58,21 +58,13 @@ dependencies {
     implementation "android.arch.persistence.room:runtime:$archVersion"
     kapt "android.arch.persistence.room:compiler:$archVersion"
 
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    implementation "com.google.dagger:dagger-android:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
-
     implementation "com.google.android.gms:play-services-auth:$firebaseVersion"
     implementation "com.google.firebase:firebase-database:$firebaseVersion"
     implementation "com.google.firebase:firebase-crash:$firebaseVersion"
     implementation "com.google.firebase:firebase-auth:$firebaseVersion"
     implementation "com.google.firebase:firebase-messaging:$firebaseVersion"
 
-    implementation "com.firebaseui:firebase-ui-auth:$firebaseUiVersion"
-
-    implementation ('com.github.b3er.rxfirebase:firebase-database-kotlin:11.2.0') {
+    implementation('com.github.b3er.rxfirebase:firebase-database-kotlin:11.2.0') {
         transitive = true
     }
 
@@ -83,6 +75,8 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingsVersion"
 
     implementation 'com.github.badoualy:datepicker-timeline:c6dcd05737'
+
+    implementation 'com.mikhaellopez:circularimageview:3.0.2'
 }
 
 apply plugin: 'com.google.gms.google-services'
