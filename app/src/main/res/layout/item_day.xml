@@ -11,6 +11,7 @@
     android:background="?selectableItemBackgroundBorderless"
     android:clickable="true"
     android:focusable="true"
-    android:textColor="@android:color/black"
+    android:textColor="@android:color/white"
     android:textSize="18sp"
+    tools:background="@android:color/black"
     tools:text="13" />

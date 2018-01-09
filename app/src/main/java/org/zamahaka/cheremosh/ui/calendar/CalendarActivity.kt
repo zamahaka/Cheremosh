@@ -1,8 +1,14 @@
 package org.zamahaka.cheremosh.ui.calendar
 
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -12,10 +18,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.activity_callendar.*
 import kotlinx.android.synthetic.main.item_day.view.*
 import kotlinx.android.synthetic.main.item_task.view.*
 import org.zamahaka.cheremosh.R
+import org.zamahaka.cheremosh.ui.drawable.BottomAngleDrawable
 
 class CalendarActivity : AppCompatActivity() {
 
@@ -39,7 +47,27 @@ class CalendarActivity : AppCompatActivity() {
                                 .inflate(DayViewHolder.LAYOUT_ID, parent, false)
                 )
             }
+
+            Picasso.with(this@CalendarActivity).isLoggingEnabled = true
+            val target: Target = object : Target {
+                override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                }
+
+                override fun onBitmapFailed(errorDrawable: Drawable?) {
+                    tag = null
+                }
+
+                override fun onBitmapLoaded(bitmap: Bitmap, from: Picasso.LoadedFrom?) {
+                    tag = null
+                    background = BottomAngleDrawable(BitmapDrawable(bitmap), 5)
+                }
+
+            }
+            tag = target
+            Picasso.with(this@CalendarActivity).load("file:///android_asset/test/img/bg.png")
+                    .into(target)
         }
+
         tasksRv.apply {
             layoutManager = LinearLayoutManager(this@CalendarActivity)
             adapter = object : RecyclerView.Adapter<TaskViewHolder>() {
@@ -68,6 +96,11 @@ class CalendarActivity : AppCompatActivity() {
                     subTitleTxt.text = subTitle
                 }
             }
+            addItemDecoration(
+                    DividerItemDecoration(this@CalendarActivity, DividerItemDecoration.VERTICAL).apply {
+                        setDrawable(ColorDrawable(Color.LTGRAY))
+                    }
+            )
         }
 
     }

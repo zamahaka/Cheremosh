@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/txtHour"
@@ -38,6 +39,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginStart="64dp"
+        app:civ_border="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@mipmap/ic_launcher_round" />
@@ -68,6 +70,7 @@
         android:id="@+id/imgStatus"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
