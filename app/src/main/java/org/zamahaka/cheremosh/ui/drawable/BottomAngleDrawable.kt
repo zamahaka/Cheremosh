@@ -13,6 +13,12 @@ class BottomAngleDrawable(
 ) : Drawable() {
 
 
+    private val paint = Paint().apply {
+        style = Paint.Style.FILL
+        isAntiAlias = true
+    }
+
+
     override fun draw(canvas: Canvas) {
         val width = canvas.width.toFloat()
         val height = canvas.height.toFloat()
@@ -24,6 +30,9 @@ class BottomAngleDrawable(
             lineTo(0f, height)
             close()
         }
+
+        canvas.drawPath(path, paint)
+
         canvas.clipPath(path)
 
         drawable.draw(canvas)
