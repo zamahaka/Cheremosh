@@ -1,8 +1,10 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'io.fabric'
+
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 kotlin {
     experimental {
@@ -47,13 +49,16 @@ dependencies {
     implementation "org.jetbrains.anko:anko-appcompat-v7-commons:$anko_version"
     implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
 
+    implementation "com.android.support:multidex:1.0.3"
+
+    implementation "com.crashlytics.sdk.android:crashlytics:$crashlytics_version"
+
     implementation "ru.gildor.coroutines:kotlin-coroutines-retrofit:$retrofit_coroutine_version"
 
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-android-architecture:$koin_version"
 
     implementation "com.android.support.constraint:constraint-layout:$constraint_version"
-
     implementation "com.android.support:support-vector-drawable:$support_version"
     implementation "com.android.support:support-v4:$support_v4_version"
     implementation "com.android.support:appcompat-v7:$support_v7_version"
@@ -63,7 +68,6 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.picasso:picasso:$picasso_version"
 
     implementation "android.arch.persistence.room:runtime:$room_version"
@@ -76,19 +80,7 @@ dependencies {
     implementation "com.google.firebase:firebase-auth:15.1.0"
     implementation "com.google.firebase:firebase-messaging:15.0.2"
 
-    implementation('com.github.b3er.rxfirebase:firebase-database-kotlin:11.2.0') {
-        transitive = true
-    }
-
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-
-    implementation "com.jakewharton.rxbinding2:rxbinding:$rxBindingsVersion"
-    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingsVersion"
-
-    implementation 'com.github.badoualy:datepicker-timeline:c6dcd05737'
-
-    implementation 'com.mikhaellopez:circularimageview:3.0.2'
+    implementation "com.mikhaellopez:circularimageview:$civ_version"
 }
 
 apply plugin: 'com.google.gms.google-services'

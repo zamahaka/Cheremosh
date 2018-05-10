@@ -1,9 +1,9 @@
 package org.zamahaka.cheremosh
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import org.koin.android.ext.android.startKoin
 
-class App : Application() {
+class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
