@@ -1,6 +1,6 @@
-package org.zamahaka.cheremosh.praktuka.repository.datasource
+package org.zamahaka.cheremosh.domain.repository.datasource
 
-import org.zamahaka.cheremosh.praktuka.model.Concert
+import org.zamahaka.cheremosh.domain.model.Concert
 
 interface ConcertDataSource {
 

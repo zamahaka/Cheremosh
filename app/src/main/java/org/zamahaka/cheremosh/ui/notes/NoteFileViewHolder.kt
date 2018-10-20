@@ -11,9 +11,9 @@ import org.zamahaka.cheremosh.model.NoteFile
 import org.zamahaka.cheremosh.ui.rv.BindViewHolder
 import org.zamahaka.cheremosh.ui.rv.ViewHolderViewCreator
 
-class NoteFilesViewHolder private constructor(
+class NoteFileViewHolder private constructor(
         override val containerView: View,
-        onClick: (adapterPosition: Int) -> Unit
+        onClick: (position: Int) -> Unit
 ) : RecyclerView.ViewHolder(containerView), BindViewHolder<NoteFile>, LayoutContainer {
 
 
@@ -30,8 +30,8 @@ class NoteFilesViewHolder private constructor(
     companion object : ViewHolderViewCreator {
         override val layoutRes: Int get() = R.layout.item_note_file
 
-        operator fun invoke(parent: ViewGroup, onClick: (adapterPosition: Int) -> Unit) =
-                NoteFilesViewHolder(containerView = inflate(parent), onClick = onClick)
+        operator fun invoke(parent: ViewGroup, onClick: (position: Int) -> Unit) =
+                NoteFileViewHolder(containerView = inflate(parent), onClick = onClick)
     }
 
 }

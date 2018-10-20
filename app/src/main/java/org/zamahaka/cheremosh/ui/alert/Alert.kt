@@ -1,4 +1,4 @@
-package com.paragoncoin.paragon.ui.alert
+package org.zamahaka.cheremosh.ui.alert
 
 import android.content.Context
 import android.content.DialogInterface

@@ -1,12 +1,12 @@
-package org.zamahaka.cheremosh.praktuka
+package org.zamahaka.cheremosh.ui.concert
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.item_concert.view.*
 import org.zamahaka.cheremosh.R
 import org.zamahaka.cheremosh.Url
+import org.zamahaka.cheremosh.domain.model.Concert
 import org.zamahaka.cheremosh.extensions.load
-import org.zamahaka.cheremosh.praktuka.model.Concert
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,7 +16,7 @@ class ConcertViewHolder(
 ) : RecyclerView.ViewHolder(view) {
 
     init {
-
+        view.setOnClickListener { adapterPosition.takeIf { it != -1 }?.let(onClick) }
     }
 
     fun bind(concert: Concert) = with(concert) {

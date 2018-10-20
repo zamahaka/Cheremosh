@@ -1,13 +1,13 @@
-package org.zamahaka.cheremosh.praktuka
+package org.zamahaka.cheremosh.ui.concert
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
-import org.zamahaka.cheremosh.praktuka.model.Concert
-import org.zamahaka.cheremosh.praktuka.repository.ConcertRepository
-import org.zamahaka.cheremosh.praktuka.repository.datasource.remote.ConcertRemoteDataSource
+import org.zamahaka.cheremosh.domain.model.Concert
+import org.zamahaka.cheremosh.domain.repository.ConcertRepository
+import org.zamahaka.cheremosh.domain.repository.datasource.remote.ConcertRemoteDataSource
 
 class ConcertViewModel(
         private val concertRepository: ConcertRepository,
