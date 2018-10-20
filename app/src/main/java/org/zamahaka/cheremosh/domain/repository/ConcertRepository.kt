@@ -1,8 +1,8 @@
-package org.zamahaka.cheremosh.praktuka.repository
+package org.zamahaka.cheremosh.domain.repository
 
-import org.zamahaka.cheremosh.praktuka.model.Concert
-import org.zamahaka.cheremosh.praktuka.repository.datasource.ConcertDataSource
-import org.zamahaka.cheremosh.praktuka.repository.datasource.remote.ConcertRemoteDataSource
+import org.zamahaka.cheremosh.domain.model.Concert
+import org.zamahaka.cheremosh.domain.repository.datasource.ConcertDataSource
+import org.zamahaka.cheremosh.domain.repository.datasource.remote.ConcertRemoteDataSource
 
 class ConcertRepository(
         private val remote: ConcertRemoteDataSource

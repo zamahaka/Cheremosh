@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Cheremosh</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="news">News</string>
+    <string name="concerts">Concerts</string>
+    <string name="rehearsals">Rehearsals</string>
+    <string name="profile">Profile</string>
+    <string name="notes">Notes</string>
 </resources>

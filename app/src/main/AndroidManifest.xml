@@ -12,24 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.timeline.TimeLineActivity">
-            <intent-filter>
-                <action android:name="TIMELINE" />
-
-                <category android:name="TIMELINE" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.calendar.CalendarActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-            <intent-filter>
-                <action android:name="CalendarActivity" />
-
-                <category android:name="CalendarActivity" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".praktuka.PraktukaActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
