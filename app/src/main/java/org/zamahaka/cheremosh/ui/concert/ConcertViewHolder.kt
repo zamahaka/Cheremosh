@@ -1,6 +1,6 @@
 package org.zamahaka.cheremosh.ui.concert
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.item_concert.view.*
 import org.zamahaka.cheremosh.R

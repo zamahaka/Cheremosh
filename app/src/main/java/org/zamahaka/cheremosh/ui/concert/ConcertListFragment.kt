@@ -1,17 +1,17 @@
 package org.zamahaka.cheremosh.ui.concert
 
-import android.arch.lifecycle.Observer
 import android.graphics.Rect
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_concert.*
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.support.v4.toast
-import org.koin.android.architecture.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.zamahaka.cheremosh.R
 import org.zamahaka.cheremosh.ui.ReselectListener
 

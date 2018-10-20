@@ -1,14 +1,14 @@
 package org.zamahaka.cheremosh.ui.base
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LifecycleRegistry
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import android.os.Bundle
-import android.support.annotation.CallSuper
-import android.support.v4.app.Fragment
+import androidx.annotation.CallSuper
+import androidx.fragment.app.Fragment
 import android.view.View
 
-abstract class ViewLifecycleFragment : Fragment() {
+abstract class ViewLifecycleFragment : androidx.fragment.app.Fragment() {
     var viewLifecycleOwner: ViewLifecycleOwner? = null
 
     @CallSuper

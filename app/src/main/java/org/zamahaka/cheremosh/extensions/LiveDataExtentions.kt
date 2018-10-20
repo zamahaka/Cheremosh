@@ -1,8 +1,8 @@
 package org.zamahaka.cheremosh.extensions
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 /**
  * Created by Yura Stetsyc on 06-9-17.

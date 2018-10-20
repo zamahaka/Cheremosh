@@ -1,6 +1,6 @@
 package org.zamahaka.cheremosh
 
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import org.koin.android.ext.android.startKoin
 import org.zamahaka.cheremosh.di.appModules
 

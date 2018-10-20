@@ -36,7 +36,7 @@ private suspend inline fun DatabaseReference.awaitDataOf(default: List<Concert>)
         }
     })
 
-    continuation.invokeOnCompletion {
+    continuation.invokeOnCancellation {
         if (continuation.isCancelled) {
             try {
                 cancel()

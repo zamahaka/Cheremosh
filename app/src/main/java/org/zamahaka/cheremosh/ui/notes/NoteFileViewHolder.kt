@@ -1,8 +1,8 @@
 package org.zamahaka.cheremosh.ui.notes
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_note_file.*
 import org.zamahaka.cheremosh.R

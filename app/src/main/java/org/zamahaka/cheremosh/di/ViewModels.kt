@@ -1,9 +1,9 @@
 package org.zamahaka.cheremosh.di
 
-import org.koin.android.architecture.ext.viewModel
-import org.koin.dsl.module.applicationContext
+import org.koin.androidx.viewmodel.ext.koin.viewModel
+import org.koin.dsl.module.module
 import org.zamahaka.cheremosh.ui.notes.NotesListViewModel
 
-val viewModelsModule = applicationContext {
+val viewModelsModule = module {
     viewModel { NotesListViewModel() }
 }

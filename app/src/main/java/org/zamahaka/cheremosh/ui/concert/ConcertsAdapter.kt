@@ -1,9 +1,9 @@
 package org.zamahaka.cheremosh.ui.concert
 
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import org.zamahaka.cheremosh.domain.model.Concert
 
 class ConcertsAdapter(

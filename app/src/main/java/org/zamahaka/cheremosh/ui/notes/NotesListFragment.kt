@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_notes.*
-import org.koin.android.architecture.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.zamahaka.cheremosh.R
 import org.zamahaka.cheremosh.extensions.notImplementedToast
 import org.zamahaka.cheremosh.extensions.observe

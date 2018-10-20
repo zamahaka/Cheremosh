@@ -2,8 +2,8 @@ package org.zamahaka.cheremosh.ui.rv
 
 import android.graphics.Canvas
 import android.graphics.drawable.ColorDrawable
-import android.support.annotation.ColorInt
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.ColorInt
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Created by zamahaka on 30.10.2017.
