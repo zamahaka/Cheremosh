@@ -28,7 +28,7 @@ class NotesListFragment : BaseFragment() {
 
         rvNotes.apply { adapter = notesFilesAdapter }
 
-        viewModel.notesFiles.observe(viewLifecycleOwner!!) {
+        viewModel.notesFiles.observe(viewLifecycleOwner) {
             Log.d("myLog", "onViewCreated: $it")
 
             notesFilesAdapter.submitList(it.orEmpty())
