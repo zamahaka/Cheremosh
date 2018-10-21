@@ -1,12 +1,10 @@
 package org.zamahaka.cheremosh.ui.notes
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_notes.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.zamahaka.cheremosh.R
-import org.zamahaka.cheremosh.extensions.notImplementedToast
 import org.zamahaka.cheremosh.extensions.observe
 import org.zamahaka.cheremosh.ui.base.BaseFragment
 
@@ -19,7 +17,7 @@ class NotesListFragment : BaseFragment() {
 
 
     private val notesFilesAdapter by lazy {
-        NotesFilesAdapter { requireContext().notImplementedToast() }
+        NotesFilesAdapter(onClick = viewModel::fileSelected, onCancel = viewModel::fileCanceled)
     }
 
 
@@ -29,8 +27,6 @@ class NotesListFragment : BaseFragment() {
         rvNotes.apply { adapter = notesFilesAdapter }
 
         viewModel.notesFiles.observe(viewLifecycleOwner) {
-            Log.d("myLog", "onViewCreated: $it")
-
             notesFilesAdapter.submitList(it.orEmpty())
         }
     }

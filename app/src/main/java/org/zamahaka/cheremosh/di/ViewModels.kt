@@ -5,5 +5,11 @@ import org.koin.dsl.module.module
 import org.zamahaka.cheremosh.ui.notes.NotesListViewModel
 
 val viewModelsModule = module {
-    viewModel { NotesListViewModel() }
+    viewModel {
+        NotesListViewModel(
+                context = get(),
+                filesDataSource = get(),
+                filesDownloader = get()
+        )
+    }
 }
