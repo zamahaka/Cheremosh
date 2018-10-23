@@ -27,12 +27,14 @@ class NoteFileViewHolder private constructor(
     override fun bind(data: NotesFileListData) {
         txtName.text = data.notesFile.name
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            progress.setProgress(data.progress, true)
-        } else progress.progress = data.progress
+        updateProgress(new = data.progress)
 
         if (data.progressing) groupProgress.visible() else groupProgress.gone()
     }
+
+    fun updateProgress(new: Int) = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        progress.setProgress(new, true)
+    } else progress.progress = new
 
 
     companion object : ViewHolderViewCreator {
