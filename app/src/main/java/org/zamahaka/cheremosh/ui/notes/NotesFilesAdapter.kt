@@ -1,23 +1,18 @@
 package org.zamahaka.cheremosh.ui.notes
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import org.zamahaka.cheremosh.ui.rv.IdEntityRvAdapter
 
 class NotesFilesAdapter(
         private val onClick: (NotesFileListData) -> Unit,
         private val onCancel: (NotesFileListData) -> Unit
-) : IdEntityRvAdapter<NotesFileListData, NoteFileViewHolder>(
-        object : DiffUtil.ItemCallback<NotesFileListData>() {
-            override fun areItemsTheSame(oldItem: NotesFileListData, newItem: NotesFileListData): Boolean = oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: NotesFileListData, newItem: NotesFileListData): Boolean = oldItem == newItem
-            override fun getChangePayload(oldItem: NotesFileListData, newItem: NotesFileListData): Any? = when {
-                oldItem.progressing && newItem.progressing -> newItem.progress
+) : IdEntityRvAdapter<NotesFileListData, NoteFileViewHolder>(IdEntityCallback { old, new ->
+    when {
+        old.progressing && new.progressing -> new.progress
 
-                else -> null
-            }
-        }
-) {
+        else -> null
+    }
+}) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             NoteFileViewHolder(
