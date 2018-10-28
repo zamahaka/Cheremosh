@@ -42,6 +42,8 @@ class NotesListViewModel(
         val fileName = getFileName(file.notesFile)
 
         when {
+            filesDownloader.isDownloading(file.notesFile.file) -> {
+            }
             filePersist.hasFile(fileName) -> fileOpener.openPdf(filePersist.getFile(name = fileName))
             !filesDownloader.isDownloading(file.notesFile.file) -> download(file)
         }
@@ -67,8 +69,6 @@ class NotesListViewModel(
                         )
                 ))
             }
-
-            onComplete { updateFileListData(file.copy(status = NoteFileStatus.Downloaded)) }
 
             onCancel { updateFileListData(file.copy(status = NoteFileStatus.NotDownloaded)) }
 

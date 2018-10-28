@@ -27,7 +27,7 @@ class RealFilePersist(
 
     override fun createFile(name: String): File = File(filesDir, name)
 
-    override fun hasFile(name: String): Boolean = fileList.first { it.name == name } != null
+    override fun hasFile(name: String): Boolean = fileList.firstOrNull { it.name == name } != null
 
     override fun getFile(name: String): File = createFile(name = name)
 

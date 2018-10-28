@@ -24,7 +24,7 @@ class NoteFileViewHolder private constructor(
         onClick(view, onClick)
         onClick(btnDownload, onDownload)
         onClick(btnCancel, onCancel)
-        onClick(btnDownload, onDelete)
+        onClick(btnDelete, onDelete)
     }
 
 
