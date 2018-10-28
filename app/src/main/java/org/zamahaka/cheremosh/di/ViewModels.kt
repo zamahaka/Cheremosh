@@ -8,7 +8,7 @@ import org.zamahaka.cheremosh.ui.notes.NotesListViewModel
 val viewModelsModule = module {
     viewModel {
         NotesListViewModel(
-                context = get(),
+                fileOpener = get(),
                 filesDataSource = get(),
                 filesDownloader = get(),
                 filePersist = RealFilePersist(

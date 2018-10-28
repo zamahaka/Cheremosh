@@ -15,4 +15,4 @@ val module = module {
     viewModel { ConcertViewModel(get(), get()) }
 }
 
-val appModules = listOf(module, viewModelsModule, dataSourceModule)
+val appModules = listOf(module, viewModelsModule, dataSourceModule, providersModule)
