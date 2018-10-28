@@ -6,8 +6,16 @@ import org.zamahaka.cheremosh.model.NoteFileId
 
 data class NotesFileListData(
         val notesFile: NoteFile,
-        val progressing: Boolean = false,
-        val progress: Int = 0
+        val status: NoteFileStatus
 ) : IdEntity<NoteFileId> {
     override val id: NoteFileId get() = notesFile.id
 }
+
+sealed class NoteFileStatus {
+    object Downloaded : NoteFileStatus()
+    object NotDownloaded : NoteFileStatus()
+    class Downloading(val progress: Int) : NoteFileStatus()
+}
+
+
+val NotesFileListData.isDownloading get() = status is NoteFileStatus.Downloading

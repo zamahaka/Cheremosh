@@ -3,36 +3,54 @@ package org.zamahaka.cheremosh.domain.filedownload
 import com.google.firebase.storage.StorageReference
 import java.io.File
 
-class FileDownloadTask(
+interface FileDownloadTask {
+
+    val total: Long
+    val current: Long
+
+    fun onSuccess(handler: (File) -> Unit)
+    fun onFailure(handler: (Exception) -> Unit)
+    fun onComplete(handler: () -> Unit)
+    fun onCancel(handler: () -> Unit)
+    fun onProgress(handler: (current: Long, full: Long) -> Unit)
+
+    fun cancel()
+
+}
+
+class FirebaseFileDownloadTask(
         fileReference: StorageReference,
         private val fileToSaveIn: File
-) {
+) : FileDownloadTask {
 
     private val firebaseTask = fileReference.getFile(fileToSaveIn)
 
 
-    fun onSuccess(handler: (File) -> Unit) {
+    override val total: Long get() = firebaseTask.snapshot.totalByteCount
+    override val current: Long get() = firebaseTask.snapshot.bytesTransferred
+
+    override fun onSuccess(handler: (File) -> Unit) {
         firebaseTask.addOnSuccessListener { handler(fileToSaveIn) }
     }
 
-    fun onFailure(handler: (Exception) -> Unit) {
+    override fun onFailure(handler: (Exception) -> Unit) {
         firebaseTask.addOnFailureListener(handler)
     }
 
-    fun onComplete(handler: () -> Unit) {
+    override fun onComplete(handler: () -> Unit) {
         firebaseTask.addOnCompleteListener { handler() }
     }
 
-    fun onCancel(handler: () -> Unit) {
+    override fun onCancel(handler: () -> Unit) {
         firebaseTask.addOnCanceledListener(handler)
     }
 
-    fun onProgress(handler: (current: Long, full: Long) -> Unit) {
+    override fun onProgress(handler: (current: Long, full: Long) -> Unit) {
         firebaseTask.addOnProgressListener { handler(it.bytesTransferred, it.totalByteCount) }
     }
 
 
-    fun cancel() {
+    override fun cancel() {
         firebaseTask.cancel()
         if (fileToSaveIn.exists()) fileToSaveIn.delete()
     }

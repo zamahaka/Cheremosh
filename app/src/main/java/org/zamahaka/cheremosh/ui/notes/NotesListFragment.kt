@@ -17,7 +17,12 @@ class NotesListFragment : BaseFragment() {
 
 
     private val notesFilesAdapter by lazy {
-        NotesFilesAdapter(onClick = viewModel::fileSelected, onCancel = viewModel::fileCanceled)
+        NotesFilesAdapter(
+                onClick = viewModel::fileSelected,
+                onDownload = viewModel::download,
+                onCancel = viewModel::cancelDownload,
+                onDelete = viewModel::delete
+        )
     }
 
 

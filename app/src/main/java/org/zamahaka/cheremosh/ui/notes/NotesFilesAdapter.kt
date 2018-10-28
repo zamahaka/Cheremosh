@@ -5,10 +5,13 @@ import org.zamahaka.cheremosh.ui.rv.IdEntityRvAdapter
 
 class NotesFilesAdapter(
         private val onClick: (NotesFileListData) -> Unit,
-        private val onCancel: (NotesFileListData) -> Unit
+        private val onDownload: (NotesFileListData) -> Unit,
+        private val onCancel: (NotesFileListData) -> Unit,
+        private val onDelete: (NotesFileListData) -> Unit
 ) : IdEntityRvAdapter<NotesFileListData, NoteFileViewHolder>(IdEntityCallback { old, new ->
     when {
-        old.progressing && new.progressing -> new.progress
+        old.status is NoteFileStatus.Downloading && new.status is NoteFileStatus.Downloading ->
+            new.status.progress
 
         else -> null
     }
@@ -18,7 +21,9 @@ class NotesFilesAdapter(
             NoteFileViewHolder(
                     parent = parent,
                     onClick = { onClick(getItem(it)) },
-                    onCancel = { onCancel(getItem(it)) }
+                    onDownload = { onDownload(getItem(it)) },
+                    onCancel = { onCancel(getItem(it)) },
+                    onDelete = { onDelete(getItem(it)) }
             )
 
     override fun onBindViewHolder(holder: NoteFileViewHolder, position: Int) =

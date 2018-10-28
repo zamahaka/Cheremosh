@@ -2,9 +2,8 @@ package org.zamahaka.cheremosh.domain
 
 import kotlin.math.roundToInt
 
-fun progressPercentageOf(current: Number, fromTotal: Number): Int =
-        (current.toFloat() / fromTotal.toFloat())
-                .coerceAtLeast(0.01f)
-                .times(100)
+fun progressPercentage(of: Number, from: Number): Int =
+        (of.toFloat() / from.toFloat() * 100)
                 .roundToInt()
-                .coerceAtLeast(1)
+                .coerceAtLeast(0)
+                .coerceAtMost(100)

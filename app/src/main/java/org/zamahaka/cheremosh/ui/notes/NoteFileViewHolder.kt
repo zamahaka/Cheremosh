@@ -15,21 +15,43 @@ import org.zamahaka.cheremosh.ui.rv.ViewHolderViewCreator
 class NoteFileViewHolder private constructor(
         view: View,
         onClick: (position: Int) -> Unit,
-        onCancel: (position: Int) -> Unit
+        onDownload: (position: Int) -> Unit,
+        onCancel: (position: Int) -> Unit,
+        onDelete: (position: Int) -> Unit
 ) : BaseRvViewHolder(view), BindViewHolder<NotesFileListData> {
 
     init {
         onClick(view, onClick)
+        onClick(btnDownload, onDownload)
         onClick(btnCancel, onCancel)
+        onClick(btnDownload, onDelete)
     }
 
 
     override fun bind(data: NotesFileListData) {
         txtName.text = data.notesFile.name
 
-        updateProgress(new = data.progress)
+        when (data.status) {
+            NoteFileStatus.Downloaded -> {
+                btnDownload.gone()
+                groupProgress.gone()
+                btnDelete.visible()
+            }
 
-        if (data.progressing) groupProgress.visible() else groupProgress.gone()
+            is NoteFileStatus.Downloading -> {
+                btnDownload.gone()
+                groupProgress.visible()
+                btnDelete.gone()
+
+                updateProgress(data.status.progress)
+            }
+
+            NoteFileStatus.NotDownloaded -> {
+                btnDownload.visible()
+                groupProgress.gone()
+                btnDelete.gone()
+            }
+        }
     }
 
     fun updateProgress(new: Int) = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -43,9 +65,12 @@ class NoteFileViewHolder private constructor(
         operator fun invoke(
                 parent: ViewGroup,
                 onClick: (position: Int) -> Unit,
-                onCancel: (position: Int) -> Unit
+                onDownload: (position: Int) -> Unit,
+                onCancel: (position: Int) -> Unit,
+                onDelete: (position: Int) -> Unit
         ) = NoteFileViewHolder(
-                view = inflate(parent), onClick = onClick, onCancel = onCancel
+                view = inflate(parent), onClick = onClick,
+                onDownload = onDownload, onCancel = onCancel, onDelete = onDelete
         )
     }
 

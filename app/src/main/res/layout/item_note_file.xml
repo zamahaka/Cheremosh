@@ -39,38 +39,53 @@
         android:id="@+id/txtName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/progress"
-        app:layout_constraintEnd_toStartOf="@id/btnCancel"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/btnDownload"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toTopOf="@id/guidelineTop"
         tools:text="Kacha" />
 
     <ImageButton
-        android:id="@+id/btnCancel"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/btnDownload"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:background="?selectableItemBackgroundBorderless"
-        android:indeterminate="false"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintEnd_toStartOf="@+id/btnCancel"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop"
+        app:srcCompat="@drawable/ic_file_download" />
+
+    <ImageButton
+        android:id="@+id/btnCancel"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="?selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
+        app:layout_constraintEnd_toStartOf="@+id/btnDelete"
         app:layout_constraintTop_toTopOf="@id/guidelineTop"
         app:srcCompat="@drawable/ic_cancel_black_24dp" />
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="?selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop"
+        app:srcCompat="@drawable/ic_delete" />
 
     <ProgressBar
         android:id="@+id/progress"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="16dp"
         android:indeterminate="false"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
-        app:layout_constraintEnd_toStartOf="@id/btnCancel"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+        app:layout_constraintEnd_toStartOf="@+id/btnDownload"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/groupProgress"

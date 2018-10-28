@@ -3,64 +3,121 @@ package org.zamahaka.cheremosh.ui.notes
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.FileProvider
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.storage.FirebaseStorage
 import org.jetbrains.anko.newTask
+import org.jetbrains.anko.noHistory
 import org.jetbrains.anko.toast
 import org.zamahaka.cheremosh.domain.datasource.NotesFilesDataSource
-import org.zamahaka.cheremosh.domain.filedownload.NotesFilesDownloader
-import org.zamahaka.cheremosh.domain.progressPercentageOf
+import org.zamahaka.cheremosh.domain.filedownload.FirebaseFilesDownloader
+import org.zamahaka.cheremosh.domain.persist.FilePersist
+import org.zamahaka.cheremosh.domain.progressPercentage
+import org.zamahaka.cheremosh.extensions.asMutable
+import org.zamahaka.cheremosh.extensions.map
+import org.zamahaka.cheremosh.model.NoteFile
 import java.io.File
 
 class NotesListViewModel(
         private val context: Context,
         private val filesDataSource: NotesFilesDataSource,
-        private val filesDownloader: NotesFilesDownloader
+        private val filesDownloader: FirebaseFilesDownloader,
+        private val filePersist: FilePersist
 ) : ViewModel() {
 
-    val notesFiles = MediatorLiveData<List<NotesFileListData>>()
-            .apply {
-                addSource(filesDataSource.notes) {
-                    value = it.orEmpty().map { file -> NotesFileListData(file) }
-                }
-            }
+    val notesFiles = filesDataSource.notes.map {
+        it.map { notes ->
+            NotesFileListData(
+                    notesFile = notes,
+                    status = when {
+                        filePersist.hasFile(getFileName(notes)) -> NoteFileStatus.Downloaded
+
+                        filesDownloader.isDownloading(notes.file) -> NoteFileStatus.Downloading(
+                                filesDownloader.getTask(notes.file)?.run {
+                                    progressPercentage(of = current, from = total)
+                                } ?: 0
+                        )
+
+                        else -> NoteFileStatus.NotDownloaded
+                    }
+            )
+        }
+    }.asMutable()
 
 
     fun fileSelected(file: NotesFileListData) {
-        filesDownloader.downloadFile(file.notesFile).apply {
-            onSuccess { openPdf(it) }
+        val fileName = getFileName(file.notesFile)
+
+        if (filePersist.hasFile(fileName)) {
+            openPdf(filePersist.getFile(name = fileName))
+        } else context.toast("Not implemented")
+    }
+
+    fun download(file: NotesFileListData) {
+        val fileUri = file.notesFile.file
+
+        filesDownloader.download(
+                uri = fileUri,
+                into = filePersist.createFile(
+                        name = getFileName(file.notesFile)
+                )
+        ).apply {
+            onSuccess {
+                updateFileListData(file.copy(status = NoteFileStatus.Downloaded))
+            }
 
             onProgress { current, total ->
                 updateFileListData(file.copy(
-                        progressing = true,
-                        progress = progressPercentageOf(current, total)
+                        status = NoteFileStatus.Downloading(
+                                progress = progressPercentage(of = current, from = total)
+                        )
                 ))
             }
 
-            onComplete { updateFileListData(file.copy(progressing = false, progress = 0)) }
+            onComplete { updateFileListData(file.copy(status = NoteFileStatus.Downloaded)) }
 
-            onCancel { context.toast("Canceled") }
+            onCancel { updateFileListData(file.copy(status = NoteFileStatus.NotDownloaded)) }
 
-            onFailure { context.toast("Failure ${it.message}") }
+            onFailure {
+                updateFileListData(file.copy(status = NoteFileStatus.NotDownloaded))
+
+                context.toast("Failure ${it.message}")
+            }
         }
     }
 
-    fun fileCanceled(file: NotesFileListData) = filesDownloader.cancelFile(file.notesFile)
+    fun cancelDownload(file: NotesFileListData) {
+        filesDownloader.cancelFileDownload(uri = file.notesFile.file)
 
+        updateFileListData(file.copy(status = NoteFileStatus.NotDownloaded))
+    }
+
+    fun delete(file: NotesFileListData) {
+        filePersist.deleteFile(
+                name = FirebaseStorage.getInstance().getReferenceFromUrl(
+                        file.notesFile.file
+                ).name
+        )
+
+        updateFileListData(file.copy(status = NoteFileStatus.NotDownloaded))
+    }
+
+
+    private fun getFileName(notes: NoteFile): String = FirebaseStorage.getInstance()
+            .getReferenceFromUrl(notes.file).name
 
     private fun openPdf(file: File) {
         val intent = Intent(Intent.ACTION_VIEW).apply {
-            flags = Intent.FLAG_ACTIVITY_NO_HISTORY
             setDataAndType(
                     FileProvider.getUriForFile(context, context.applicationContext.packageName, file),
                     "application/pdf"
             )
             newTask()
+            noHistory()
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
         if (intent.resolveActivity(context.packageManager) != null) {
             context.startActivity(intent)
-        } else context.toast("Not pdf activity found")
+        } else context.toast("No pdf activity found")
     }
 
     private fun updateFileListData(data: NotesFileListData) {
