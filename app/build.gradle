@@ -53,10 +53,11 @@ dependencies {
 
     implementation 'androidx.multidex:multidex:2.0.0'
 
-    def coroutine_version = "0.24.0"
+    def coroutine_version = "1.0.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
 
-    def anko_version = "0.10.6"
+    def anko_version = "0.10.7"
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     implementation "org.jetbrains.anko:anko-appcompat-v7-commons:$anko_version"
     implementation "org.jetbrains.anko:anko-coroutines:$anko_version"

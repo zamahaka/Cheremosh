@@ -3,8 +3,9 @@ package org.zamahaka.cheremosh.ui.concert
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.zamahaka.cheremosh.domain.model.Concert
 import org.zamahaka.cheremosh.domain.repository.ConcertRepository
 import org.zamahaka.cheremosh.domain.repository.datasource.remote.ConcertRemoteDataSource
@@ -19,7 +20,9 @@ class ConcertViewModel(
 
     init {
         val channel = remote.observe()
-        launch { for (event in channel) _concerts.postValue(event) }
+        GlobalScope.launch(Dispatchers.IO) {
+            for (event in channel) _concerts.postValue(event)
+        }
     }
 
     fun refresh() {
@@ -29,7 +32,7 @@ class ConcertViewModel(
 
 
     private fun fetchConcerts() {
-        launch(UI) { _concerts.postValue(concertRepository.getConcertsList()) }
+        GlobalScope.launch(Dispatchers.IO) { _concerts.postValue(concertRepository.getConcertsList()) }
     }
 
 }
