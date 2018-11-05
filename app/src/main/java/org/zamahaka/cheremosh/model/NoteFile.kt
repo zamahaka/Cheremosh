@@ -13,3 +13,7 @@ data class NoteFile(
 
     override val id: NoteFileId @Exclude get() = file
 }
+
+val NoteFile.isValid: Boolean get() = file.isNotBlank()
+
+fun List<NoteFile>.filterValid() = filter(NoteFile::isValid)
